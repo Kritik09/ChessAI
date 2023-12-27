@@ -1,0 +1,8 @@
+Tiles contain a chess peice
+Tiles{
+    key:[i,j]  //which tells what is the index of the tile in the board
+    hasPeice:
+    chessPeice:string //which tells what is the chess peice in the tile
+}
+
+starting fen notation = rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/
