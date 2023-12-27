@@ -14,7 +14,7 @@ export function hasPeice(index) {
 }
 export function isSamePeice(a, b) {
   return (
-    isUpperCase(currentChessBoard[a.x][a.y].peice.symbol) ==
+    isUpperCase(currentChessBoard[a.x][a.y].peice.symbol) ===
     isUpperCase(currentChessBoard[b.x][b.y].peice.symbol)
   );
 }

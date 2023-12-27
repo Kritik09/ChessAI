@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './ChessBoard.css'
 import Tiles from '../Tiles/Tiles'
 import { hasPeice, isDigit, isUpperCase } from '../../logics/util'
 import {Tile,Peice,Index} from '../../structs/struct'
-import { getAllWatchedTile, getMoves,makeMove } from '../../logics/peiceMove/moves'
+import { getAllWatchedTile, getMoves } from '../../logics/peiceMove/moves'
 
 export let currentChessBoard=[]
 let tilesUnderWatch=[]
@@ -16,7 +16,7 @@ export default function ChessBoard() {
         currentChessBoard=[]
         let currentRow=[];
         position.split("").forEach((ch)=>{
-            if(ch=="/"){
+            if(ch==="/"){
                 currentChessBoard.push(currentRow);
                 currentRow=[];
             }else if(isDigit(ch)){
@@ -42,7 +42,6 @@ export default function ChessBoard() {
         );
         currentChessBoard[from.x][from.y].peice = null;
         currentChessBoard[to.x][to.y].peice.hasMoved = true;
-        console.log(currentChessBoard[to.x][to.y]);
         currentMove = !currentMove;
         tilesUnderWatch = getAllWatchedTile(currentMove);
         for (let watchedTile of tilesUnderWatch) {
@@ -58,13 +57,13 @@ export default function ChessBoard() {
             }
         }
         if(activePeice){
-            let move=validMoves.find((ind)=>index.x==ind.x && index.y==ind.y)
+            let move=validMoves.find((ind)=>index.x===ind.x && index.y===ind.y)
             if(move){
                 makeMove(activePeice,index)
             }
             activePeice=null
             validMoves=[]
-        }else if(hasPeice(index) && isUpperCase(currentChessBoard[index.x][index.y].peice.symbol)==currentMove){
+        }else if(hasPeice(index) && isUpperCase(currentChessBoard[index.x][index.y].peice.symbol)===currentMove){
             validMoves=getMoves(index)
             if(validMoves.length){
                 activePeice=index

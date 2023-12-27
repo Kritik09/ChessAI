@@ -31,7 +31,7 @@ export default function Tiles(props) {
     <>
       <div 
       className={`tiles 
-      ${(props.index.x+props.index.y)%2==0?"white ":"black "}
+      ${(props.index.x+props.index.y)%2===0?"white ":"black "}
       ${(props.tile.isValid?"valid_cell ":"")}
       ${(props.tile.isAttacked?"attacked_cell ":"")}
       ${(props.tile.isWatched?"watched_cell ":"")}

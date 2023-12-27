@@ -46,7 +46,7 @@ export default function pawnMoves(index) {
   dir.forEach((ind, i) => {
     let cur = new Index(ind.x + index.x, ind.y + index.y);
     if (isValid(cur)) {
-      if (i == 0) {
+      if (i === 0) {
         if (!hasPeice(cur)) {
           validMoves.push(new Move(cur.x, cur.y));
           cur.x += ind.x;

@@ -1,5 +1,5 @@
 import { Index, Move } from "../../structs/struct";
-import { hasMoved, hasPeice, isSamePeice, isUpperCase, isValid } from "../util";
+import { hasPeice, isSamePeice, isValid } from "../util";
 import { currentChessBoard } from "../../components/ChessBoard/ChessBoard";
 
 const dir = [
@@ -18,8 +18,8 @@ function isTileHasOpKing(index, par) {
     if (
       isValid(cur) &&
       hasPeice(cur) &&
-      (cur.x != par.x || cur.y != par.y) &&
-      currentChessBoard[cur.x][cur.y].peice.symbol.toUpperCase() == "K"
+      (cur.x !== par.x || cur.y !== par.y) &&
+      currentChessBoard[cur.x][cur.y].peice.symbol.toUpperCase() === "K"
     ) {
       return true;
     }
