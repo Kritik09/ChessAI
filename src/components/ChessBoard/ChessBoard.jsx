@@ -3,12 +3,10 @@ import './ChessBoard.css'
 import Tiles from '../Tiles/Tiles'
 import { hasPeice, isDigit, isUpperCase } from '../../logics/util'
 import {Tile,Peice,Index} from '../../structs/struct'
-import { getAllWatchedTile, getMoves } from '../../logics/peiceMove/moves'
+import { currentMove, generateAllMoves, getMoves,makeMove } from '../../logics/peiceMove/moves'
 
 export let currentChessBoard=[]
-let tilesUnderWatch=[]
-let currentMove=true
-let validMoves=[]
+export let validMoves=[]
 let activePeice=null
 export default function ChessBoard() {
     const [chessBoard,setChessBoard]=useState([]);
@@ -36,18 +34,7 @@ export default function ChessBoard() {
     function renderBoard(){
         setChessBoard(structuredClone(currentChessBoard))
     }
-    function makeMove(from, to) {
-        currentChessBoard[to.x][to.y] = structuredClone(
-          currentChessBoard[from.x][from.y]
-        );
-        currentChessBoard[from.x][from.y].peice = null;
-        currentChessBoard[to.x][to.y].peice.hasMoved = true;
-        currentMove = !currentMove;
-        tilesUnderWatch = getAllWatchedTile(currentMove);
-        for (let watchedTile of tilesUnderWatch) {
-          currentChessBoard[watchedTile.x][watchedTile.y].isWatched = true;
-        }
-  }
+    
     function captureClick(event,index){
         for(let row of currentChessBoard){
             for(let tile of row){
@@ -63,6 +50,17 @@ export default function ChessBoard() {
             }
             activePeice=null
             validMoves=[]
+            let possibleMoves = generateAllMoves(currentMove);
+            let flag = false;
+            for (let i = 0; i < 8; i++) {
+                for (let j = 0; j < 8; j++) {
+                if (possibleMoves[i][j] && possibleMoves[i][j].length) {
+                    flag = true;
+                }
+                }
+            }
+            if(!flag)
+            alert("Game Over")
         }else if(hasPeice(index) && isUpperCase(currentChessBoard[index.x][index.y].peice.symbol)===currentMove){
             validMoves=getMoves(index)
             if(validMoves.length){

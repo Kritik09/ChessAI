@@ -1,6 +1,5 @@
 import { Index, Move } from "../../structs/struct";
 import { hasPeice, isSamePeice, isValid } from "../util";
-import { currentChessBoard } from "../../components/ChessBoard/ChessBoard";
 export default function bishopMoves(index) {
   let validMoves = [];
   const dir = [
